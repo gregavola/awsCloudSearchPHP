@@ -1,6 +1,6 @@
 <?php
 
-include ("awsCloudSearch.php");
+include ("lib/awsCloudSearch.php");
 
 // Add your search domain and domain id
 $aws = new awsCloudSearch(DOMAIN_NAME, DOMAIN_ID);
