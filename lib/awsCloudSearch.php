@@ -82,23 +82,19 @@ class awsCloudSearch {
         
         if ($method == "POST")
         {
-            $content_len = strlen($parameters);
             curl_setopt($curl2, CURLOPT_POST, true);
             curl_setopt($curl2, CURLOPT_POSTFIELDS, $parameters);
-            $headers = array(
-                "Content-Type:  application/json",
-                "Content-Length: ".$content_len,
-                "Host: ". $this->search_host
-            ); 
-
-            curl_setopt($curl2, CURLOPT_HTTPHEADER, $headers); 
+            
+            curl_setopt($curl2, CURLOPT_HTTPHEADER, array(                                                                          
+                'Content-Type: application/json',                                                                                
+                'Content-Length: ' . strlen($parameters))                                                                   
+            );
+            
         }
 
         curl_setopt($curl2, CURLOPT_URL, $url);
         curl_setopt($curl2, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl2, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($curl2, CURLOPT_SSL_VERIFYHOST, 2);
- 
+  
         $result = curl_exec($curl2);
         
         $HttpCode = curl_getinfo($curl2, CURLINFO_HTTP_CODE);
