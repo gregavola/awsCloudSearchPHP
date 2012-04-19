@@ -82,6 +82,7 @@ class awsCloudSearch {
         
         if ($method == "POST")
         {
+            $parameters = "[".$parameters."]";
             curl_setopt($curl2, CURLOPT_POST, true);
             curl_setopt($curl2, CURLOPT_POSTFIELDS, $parameters);
             
