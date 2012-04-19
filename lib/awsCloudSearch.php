@@ -77,11 +77,12 @@ class awsCloudSearch {
    */
 	
     private function call($url, $method, $parameters) {
-        $parameters = "[".$parameters."]";
+        
         $curl2 = curl_init();
         
         if ($method == "POST")
         {
+            $parameters = "[".$parameters."]";
             curl_setopt($curl2, CURLOPT_POST, true);
             curl_setopt($curl2, CURLOPT_POSTFIELDS, $parameters);
             
