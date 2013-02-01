@@ -15,8 +15,8 @@ class awsCloudSearch
     public $document_endpoint;
     public $search_endpoint;
     public $http_code = 200;
-    public $calendar_method = "2011-02-01";
-    public $availableTypes = array("update", "add", "delete");
+    public $calendar_method = '2011-02-01';
+    public $availableTypes = array('update', 'add', 'delete');
 
     /**
      * Constructor
@@ -30,11 +30,9 @@ class awsCloudSearch
     {
         $this->search_domain = $search_domain;
         $this->domain_id = $domain_id;
-
-        $this->search_host = "http://doc-" . $this->search_domain . "-" . $this->domain_id . ".us-east-1.cloudsearch.amazonaws.com";
-
-        $this->document_endpoint = "http://doc-" . $this->search_domain . "-" . $this->domain_id . ".us-east-1.cloudsearch.amazonaws.com/" . $this->calendar_method;
-        $this->search_endpoint = "http://search-" . $this->search_domain . "-" . $this->domain_id . ".us-east-1.cloudsearch.amazonaws.com/" . $this->calendar_method;
+        $this->search_host = sprintf('http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com', $this->search_domain, $this->domain_id);
+        $this->document_endpoint = sprintf('http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->search_domain, $this->domain_id, $this->calendar_method);
+        $this->search_endpoint = sprintf('http://search-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->search_domain, $this->domain_id, $this->calendar_method);
     }
 
     /**
@@ -48,7 +46,7 @@ class awsCloudSearch
     public function document($type, $params = array())
     {
         if (in_array($type, $this->availableTypes)) {
-            return $this->call($this->document_endpoint . "/documents/batch", "POST", json_encode($params));
+            return $this->call($this->document_endpoint . '/documents/batch', 'POST', json_encode($params));
         } else {
             // perform error
         }
@@ -84,11 +82,9 @@ class awsCloudSearch
     {
 
         $curl2 = curl_init();
-
         if ($method == "POST") {
             curl_setopt($curl2, CURLOPT_POST, true);
             curl_setopt($curl2, CURLOPT_POSTFIELDS, $parameters);
-
             curl_setopt($curl2, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
                 'Content-Length: ' . strlen($parameters))
@@ -97,13 +93,9 @@ class awsCloudSearch
 
         curl_setopt($curl2, CURLOPT_URL, $url);
         curl_setopt($curl2, CURLOPT_RETURNTRANSFER, 1);
-
         $result = curl_exec($curl2);
-
         $HttpCode = curl_getinfo($curl2, CURLINFO_HTTP_CODE);
-
         $this->http_code = (int) $HttpCode;
-
         return $result;
     }
 
