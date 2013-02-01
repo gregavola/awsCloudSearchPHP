@@ -8,6 +8,8 @@
  */
 class awsCloudSearch
 {
+    const DOC_API_URL = 'http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s';
+    const SEARCH_API_URL = 'http://search-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s';
 
     public $searchDomain;
     public $domainId;
@@ -29,8 +31,8 @@ class awsCloudSearch
     {
         $this->searchDomain = $searchDomain;
         $this->domainId = $domainId;
-        $this->documentEndpoint = sprintf('http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->searchDomain, $this->domainId, $this->calendarMethod);
-        $this->searchEndpoint = sprintf('http://search-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->searchDomain, $this->domainId, $this->calendarMethod);
+        $this->documentEndpoint = sprintf(self::DOC_API_URL, $this->searchDomain, $this->domainId, $this->calendarMethod);
+        $this->searchEndpoint = sprintf(self::SEARCH_API_URL, $this->searchDomain, $this->domainId, $this->calendarMethod);
     }
 
     /**
