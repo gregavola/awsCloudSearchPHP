@@ -62,11 +62,8 @@ class awsCloudSearch
      */
     public function search($term, $params = array())
     {
-        if (sizeof($params) == 0) {
-            return $this->call($this->search_endpoint . "/search?q=" . urlencode($term), "GET", array());
-        } else {
-            return $this->call($this->search_endpoint . "/search?q=" . urlencode($term) . "&" . http_build_query($params), "GET", array());
-        }
+        $queryParams = (sizeof($params) == 0) ? '' : '&' . http_build_query($params);
+        return $this->call($this->search_endpoint . "/search?q=" . urlencode($term) . $queryParams, "GET", array());
     }
 
     /**
