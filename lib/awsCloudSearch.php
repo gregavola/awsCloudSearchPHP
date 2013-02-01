@@ -9,30 +9,30 @@
 class awsCloudSearch
 {
 
-    public $search_domain;
-    public $domain_id;
-    public $search_host;
-    public $document_endpoint;
-    public $search_endpoint;
-    public $http_code = 200;
-    public $calendar_method = '2011-02-01';
+    public $searchDomain;
+    public $domainId;
+    public $searchHost;
+    public $documentEndpoint;
+    public $searchEndpoint;
+    public $httpCode = 200;
+    public $calendarMethod = '2011-02-01';
     public $availableTypes = array('update', 'add', 'delete');
 
     /**
      * Constructor
      *
-     * @param String $search_domain Search Domain
-     * @param String $domain_id     Domain ID
+     * @param String $searchDomain Search Domain
+     * @param String $domainId     Domain ID
      *
      * @return void
      */
-    public function __construct($search_domain, $domain_id)
+    public function __construct($searchDomain, $domainId)
     {
-        $this->search_domain = $search_domain;
-        $this->domain_id = $domain_id;
-        $this->search_host = sprintf('http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com', $this->search_domain, $this->domain_id);
-        $this->document_endpoint = sprintf('http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->search_domain, $this->domain_id, $this->calendar_method);
-        $this->search_endpoint = sprintf('http://search-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->search_domain, $this->domain_id, $this->calendar_method);
+        $this->searchDomain = $searchDomain;
+        $this->domainId = $domainId;
+        $this->searchHost = sprintf('http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com', $this->searchDomain, $this->domainId);
+        $this->documentEndpoint = sprintf('http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->searchDomain, $this->domainId, $this->calendarMethod);
+        $this->searchEndpoint = sprintf('http://search-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->searchDomain, $this->domainId, $this->calendarMethod);
     }
 
     /**
@@ -46,7 +46,7 @@ class awsCloudSearch
     public function document($type, $params = array())
     {
         if (in_array($type, $this->availableTypes)) {
-            return $this->call($this->document_endpoint . '/documents/batch', 'POST', json_encode($params));
+            return $this->call($this->documentEndpoint . '/documents/batch', 'POST', json_encode($params));
         } else {
             // perform error
         }
@@ -63,7 +63,7 @@ class awsCloudSearch
     public function search($term, $params = array())
     {
         $queryParams = (sizeof($params) == 0) ? '' : '&' . http_build_query($params);
-        return $this->call($this->search_endpoint . "/search?q=" . urlencode($term) . $queryParams;
+        return $this->call($this->searchEndpoint . "/search?q=" . urlencode($term) . $queryParams);
     }
 
     /**
@@ -91,8 +91,7 @@ class awsCloudSearch
         curl_setopt($curl2, CURLOPT_URL, $url);
         curl_setopt($curl2, CURLOPT_RETURNTRANSFER, 1);
         $result = curl_exec($curl2);
-        $HttpCode = curl_getinfo($curl2, CURLINFO_HTTP_CODE);
-        $this->http_code = (int) $HttpCode;
+        $this->httpCode = (int) curl_getinfo($curl2, CURLINFO_HTTP_CODE);
         return $result;
     }
 
