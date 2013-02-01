@@ -19,8 +19,12 @@ class awsCloudSearch
     public $availableTypes = array("update", "add", "delete");
 
     /**
-     * Basic constructor
+     * Constructor
      *
+     * @param String $search_domain Search Domain
+     * @param String $domain_id     Domain ID
+     *
+     * @return void
      */
     public function __construct($search_domain, $domain_id)
     {
@@ -36,7 +40,10 @@ class awsCloudSearch
     /**
      * Public document API call
      *
-     * @param $type - add, deete, $params - the ranking algorithms or other variables
+     * @param String $type   'add' or 'delete'
+     * @param Array  $params The ranking algorithms or other variables
+     *
+     * @return Mixed Result
      */
     public function document($type, $params = array())
     {
@@ -50,7 +57,10 @@ class awsCloudSearch
     /**
      * Public search API call
      *
-     * @param $term - the search term, $params - the ranking algorithms or other variables
+     * @param String $term   The search term
+     * @param String $params The ranking algorithms or other variables
+     *
+     * @return Mixed Result
      */
     public function search($term, $params = array())
     {
@@ -64,7 +74,11 @@ class awsCloudSearch
     /**
      * Private function that return the results of a GET or POST call to your domain host.
      *
-     * @param $url - url to send to, $method - the GET or POST, $parameters - the params to pass
+     * @param String $url        Url to send to
+     * @param String $method     'GET' or 'POST'
+     * @param Array  $parameters the params to pass to CURL
+     *
+     * @return Mixed Result
      */
     private function call($url, $method, $parameters)
     {
