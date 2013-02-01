@@ -11,7 +11,6 @@ class awsCloudSearch
 
     public $searchDomain;
     public $domainId;
-    public $searchHost;
     public $documentEndpoint;
     public $searchEndpoint;
     public $httpCode = 200;
@@ -30,7 +29,6 @@ class awsCloudSearch
     {
         $this->searchDomain = $searchDomain;
         $this->domainId = $domainId;
-        $this->searchHost = sprintf('http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com', $this->searchDomain, $this->domainId);
         $this->documentEndpoint = sprintf('http://doc-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->searchDomain, $this->domainId, $this->calendarMethod);
         $this->searchEndpoint = sprintf('http://search-%s-%s.us-east-1.cloudsearch.amazonaws.com/%s', $this->searchDomain, $this->domainId, $this->calendarMethod);
     }
