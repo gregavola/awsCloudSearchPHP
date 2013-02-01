@@ -38,7 +38,7 @@ class awsCloudSearch
     /**
      * Public document API call
      *
-     * @param String $type   'add' or 'delete'
+     * @param String $type   'add', 'delete' or 'update'
      * @param Array  $params The ranking algorithms or other variables
      *
      * @return Mixed Result
@@ -47,9 +47,8 @@ class awsCloudSearch
     {
         if (in_array($type, $this->availableTypes)) {
             return $this->call($this->documentEndpoint . '/documents/batch', 'POST', json_encode($params));
-        } else {
-            // perform error
         }
+        return false;
     }
 
     /**
@@ -62,7 +61,7 @@ class awsCloudSearch
      */
     public function search($term, $params = array())
     {
-        $queryParams = (sizeof($params) == 0) ? '' : '&' . http_build_query($params);
+        $queryParams = (sizeof($params) > 0) ? '&' . http_build_query($params) : '';
         return $this->call($this->searchEndpoint . "/search?q=" . urlencode($term) . $queryParams);
     }
 
