@@ -63,7 +63,7 @@ class awsCloudSearch
     public function search($term, $params = array())
     {
         $queryParams = (sizeof($params) == 0) ? '' : '&' . http_build_query($params);
-        return $this->call($this->search_endpoint . "/search?q=" . urlencode($term) . $queryParams, "GET", array());
+        return $this->call($this->search_endpoint . "/search?q=" . urlencode($term) . $queryParams;
     }
 
     /**
@@ -75,7 +75,7 @@ class awsCloudSearch
      *
      * @return Mixed Result
      */
-    private function call($url, $method, $parameters)
+    private function call($url, $method = 'GET', $parameters = array())
     {
 
         $curl2 = curl_init();
