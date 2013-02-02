@@ -1,6 +1,6 @@
 # awsCloudSearch lightweight PHP API Wrapper
 
-### This library is written to make calls against the AWS Cloud Search API.<br />
+### This lightweight library is written to make calls against the AWS Cloud Search API.<br />
 Original library: http://www.github.com/gregavola<br />
 Refactoring, optimizing: http://www.github.com/ktamas77
 
