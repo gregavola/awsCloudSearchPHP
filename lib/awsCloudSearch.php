@@ -77,20 +77,21 @@ class awsCloudSearch
     private function call($url, $method = 'GET', $parameters = array())
     {
 
-        $curl2 = curl_init();
-        if ($method == "POST") {
-            curl_setopt($curl2, CURLOPT_POST, true);
-            curl_setopt($curl2, CURLOPT_POSTFIELDS, $parameters);
-            curl_setopt($curl2, CURLOPT_HTTPHEADER, array(
+        $curl = curl_init();
+        
+        if ($method == 'POST') {
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $parameters);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
                 'Content-Length: ' . strlen($parameters))
             );
         }
 
-        curl_setopt($curl2, CURLOPT_URL, $url);
-        curl_setopt($curl2, CURLOPT_RETURNTRANSFER, 1);
-        $result = curl_exec($curl2);
-        $this->httpCode = (int) curl_getinfo($curl2, CURLINFO_HTTP_CODE);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($curl);
+        $this->httpCode = (int) curl_getinfo($curl, CURLINFO_HTTP_CODE);
         return $result;
     }
 
