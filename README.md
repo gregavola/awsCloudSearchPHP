@@ -1,6 +1,8 @@
 # awsCloudSearch PHP API Wrapper
 
-This library is written to make calls against the AWS Cloud Search API.<br />
+### This library is written to make calls against the AWS Cloud Search API.<br />
+Original library: @gregavola
+Refactoring, optimizing: @ktamas77
 
 # Requirements
 PHP 5+<br />
@@ -20,13 +22,10 @@ If you want to add a document, make sure the PARAM is in an array and formatted 
 
 <pre>
 $myAWS = new awsCloudSearch(domain, domain_id);
-$res = $myAWS->document(TYPE, TERM, PARAM);
+$res = $myAWS->document(TYPE, PARAM);
 </pre>
 
-Remember <code>TYPE</code> is either <code>add</code> or <code>delete</code>.
-
-# To Do
-Error Handling
+Remember <code>TYPE</code> is either <code>add</code>, <code>delete</code> or <code>update</code>.
 
 # Getting Help
-If you need help or have questions, please contact Greg Avola on Twitter at http://twitter.com/gregavola
+If you need help or have questions, please contact Greg Avola on Twitter at http://twitter.com/gregavola or Tamas Kalman http://twitter.com/dh2k
